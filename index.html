@@ -123,36 +123,30 @@
         </main>
     </div>
     <!-- Netlify Form (Hidden) - Für E-Mail-Updates -->
-<form name="webseite-update" netlify netlify-honeypot="bot-field" hidden>
+<!-- Vor </body> einfügen -->
+<form name="update" netlify netlify-honeypot="bot-field" hidden>
   <input type="text" name="description">
-  <input type="email" name="contact-email">
-  <!-- Für spätere Erweiterungen (z. B. Bilder) -->
-  <input type="file" name="image-uploads" multiple>
+  <input type="email" name="email">
 </form>
-    <script src="js/script.js"></script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Apartment",
-      "name": "Wohnung am Kanal in Den Haag-Leyenburg",
-      "description": "120m² Wohnung mit 3 Schlafzimmern und Kanalblick",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Beispielstraße 123",
-        "addressLocality": "Den Haag",
-        "addressRegion": "Südholland",
-        "postalCode": "1234AB",
-        "addressCountry": "NL"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "52.0705",
-        "longitude": "4.3007"
-      },
-      "numberOfRooms": "3",
-      "priceRange": "€120-€150/Nacht"
+
+<script>
+  // Dynamische Updates
+  document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // Beschreibung ersetzen
+    if (urlParams.get('description')) {
+      document.querySelector('#description').innerText = urlParams.get('description');
     }
-    </script>
+    
+    // E-Mail-Links aktualisieren
+    if (urlParams.get('email')) {
+      document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+        link.href = 'mailto:' + urlParams.get('email');
+      });
+    }
+  });
+</script>
    
 </body>
 </html>
