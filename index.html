@@ -122,7 +122,13 @@
             </section>
         </main>
     </div>
-
+    <!-- Netlify Form (Hidden) - Für E-Mail-Updates -->
+<form name="webseite-update" netlify netlify-honeypot="bot-field" hidden>
+  <input type="text" name="description">
+  <input type="email" name="contact-email">
+  <!-- Für spätere Erweiterungen (z. B. Bilder) -->
+  <input type="file" name="image-uploads" multiple>
+</form>
     <script src="js/script.js"></script>
     <script type="application/ld+json">
     {
