@@ -114,10 +114,6 @@
             <button type="submit" class="submit-btn">Anfrage versenden</button>
         </form>
     </div>
-
-
-  
-
                 <div id="form-status" class="status-message"></div>
             </section>
         </main>
@@ -129,21 +125,29 @@
   <input type="email" name="email">
 </form>
 
+<!-- Vor dem schließenden </body>-Tag -->
 <script>
-  // Dynamische Updates
   document.addEventListener('DOMContentLoaded', function() {
+    // 1. URL-Parameter auslesen
     const urlParams = new URLSearchParams(window.location.search);
     
-    // Beschreibung ersetzen
-    if (urlParams.get('description')) {
-      document.querySelector('#description').innerText = urlParams.get('description');
+    // 2. Beschreibung aktualisieren (wenn Parameter vorhanden)
+    if(urlParams.has('description')) {
+      const descElement = document.getElementById('description') || 
+                         document.querySelector('.seo-text p');
+      if(descElement) descElement.innerText = urlParams.get('description');
     }
     
-    // E-Mail-Links aktualisieren
-    if (urlParams.get('email')) {
+    // 3. E-Mail-Links aktualisieren
+    if(urlParams.has('email')) {
       document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
         link.href = 'mailto:' + urlParams.get('email');
       });
+    }
+    
+    // 4. Cache-Busting (wichtig!)
+    if(urlParams.has('updated')) {
+      window.location.href = window.location.pathname + '?updated=' + Date.now();
     }
   });
 </script>
